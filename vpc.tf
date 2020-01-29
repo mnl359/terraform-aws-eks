@@ -17,7 +17,8 @@ module "vpc" {
   enable_dns_support        = true
 
   tags = {
-    Terraform               = "true"
-    Environment             = "dev"
+    Terraform                                 = "true"
+    Environment                               = "dev"
+    "kubernetes.io/cluster/expresscart-eks"   = "shared"
   }
 }

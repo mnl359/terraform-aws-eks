@@ -4,4 +4,4 @@ tfplan
 .terraform
 .vscode/
 .DS_Store
-kubeconfig_expresscart-eks
+kubeconfig_eks-wordpress

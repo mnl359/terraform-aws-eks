@@ -92,6 +92,24 @@ locals {
     ]
 }
 
+/* EKS Wordpress Cluster */
+variable "eks_cluster_name" {
+    description     = "EKS Cluster Name"
+    default         = "eks-wordpress"
+}
+
+/* EKS Wordpress Worker Nodes */
+variable "eks_instance_type" {
+    description     = "EKS Instance Type"
+    default         = "t2.medium"
+}
+
+/* EKS Auto Scaling Group Max Size */
+variable "eks_asg_max_size" {
+    description     = "EKS Auto Scaling Group Max Size"
+    default         = 3
+}
+
 /* Security Groups Names */
 
 variable "web_sg_name" {

@@ -7,7 +7,7 @@ module "eks-wordpress" {
 
     worker_groups       = [
         {
-            instance_type = var.eks_instance_type
+            instance_type   = var.eks_instance_type
             asg_max_size    = var.eks_asg_max_size
         }
     ]

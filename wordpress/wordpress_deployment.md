@@ -1,3 +1,7 @@
+### Configure workstation kubeconfig
+
+- aws eks --region us-east-1 update-kubeconfig --name eks-wordpress --profile default
+
 ### Create Storage Class, Namespace and Secret
 
 - kubectl create -f gp2-storage-class.yaml
@@ -8,11 +12,19 @@
 
 - kubectl create -f mysql-deployment.yaml --namespace=wp
 - kubectl create -f wordpress-deployment.yaml --namespace=wp
+
+### Validate Services
+
+- kubectl get all --namespace=wp
 - kubectl get pods --namespace=wp
 - kubectl get svc --namespace=wp
 - kubectl get svc -l app=wordpress --namespace=wp -o=jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
 - kubectl get deployments --namespace=wp
 
-### Configure workstation kubeconfig
+### Delete Objects
 
-- aws eks --region us-east-1 update-kubeconfig --name eks-wordpress --profile default
+- kubectl delete deployment wordpress --namespace=wp
+- kubectl delete deployment wordpress-mysql --namespace=wp
+- kubectl delete service wordpress --namespace=wp
+- kubectl delete service wordpress-mysql --namespace=wp
+- kubectl delete namespace wp

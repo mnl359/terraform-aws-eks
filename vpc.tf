@@ -10,12 +10,6 @@ module "vpc" {
   database_subnets          = local.database_subnets
   public_subnets            = local.public_subnets
 
-  #azs                       = [
-  #  "${lookup(var.region, var.environment)}a",
-  #  "${lookup(var.region, var.environment)}b",
-  #  "${lookup(var.region, var.environment)}c"
-  #]
-
   # Could be
   azs = local.availability_zones
 

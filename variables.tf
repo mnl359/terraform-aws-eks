@@ -25,7 +25,7 @@ variable "is_project_terraformed" {
 variable "region" {
     type            = map(string)
     default         = {
-        "development"   = "us-east-2"
+        "development"   = "us-east-1"
         "qa"            = "us-east-1"
         "staging"       = "us-east-2"
         "production"    = "us-east-2"

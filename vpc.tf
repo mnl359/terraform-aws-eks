@@ -7,7 +7,6 @@ module "vpc" {
   
   # Working with local variables
   private_subnets           = local.private_subnets
-  database_subnets          = local.database_subnets
   public_subnets            = local.public_subnets
 
   # Could be

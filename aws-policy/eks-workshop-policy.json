@@ -1,0 +1,96 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "IAMRequirements",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:CreateRole",
+                "iam:AttachRolePolicy",
+                "iam:AddRoleToInstanceProfile",
+                "iam:ListInstanceProfilesForRole",
+                "iam:PassRole",
+                "iam:DetachRolePolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListRolePolicies",
+                "iam:DeleteInstanceProfile",
+                "iam:GetRole",
+                "iam:GetInstanceProfile",
+                "iam:DeleteRole",
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "EC2Requirements",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:*Tags*",
+                "ec2:*InternetGateway",
+                "ec2:CreateVpc",
+                "ec2:*NetworkInterface*",
+                "ec2:*Instances*",
+                "ec2:ModifyVpcAttribute",
+                "ec2:*Route*",
+                "ec2:Describe*",
+                "ec2:DeleteVpc",
+                "ec2:*SecurityGroup*",
+                "ec2:*Subnet*",
+                "ec2:AllocateAddress",
+                "ec2:AssociateAddress",
+                "ec2:DescribeAddresses",
+                "ec2:ReleaseAddress",
+                "ec2:DisassociateAddress"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AutoScalingRequirements",
+            "Effect": "Allow",
+            "Action": [
+                "autoscaling:DescribeLaunchConfigurations",
+                "autoscaling:DescribeScalingActivities",
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:UpdateAutoScalingGroup",
+                "autoscaling:SuspendProcesses",
+                "autoscaling:CreateLaunchConfiguration",
+                "autoscaling:DeleteLaunchConfiguration",
+                "autoscaling:DeleteAutoScalingGroup",
+                "autoscaling:CreateAutoScalingGroup"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SecretsManagerRequirements",
+            "Effect": "Allow",
+            "Action": "secretsmanager:GetRandomPassword",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DynamodbFullAccess",
+            "Effect": "Allow",
+            "Action": "dynamodb:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "S3FullAccess",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "ElasticLoadBalancingRequirements",
+            "Effect": "Allow",
+            "Action": "elasticloadbalancing:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "EKSFullAccess",
+            "Effect": "Allow",
+            "Action": "eks:*",
+            "Resource": "*"
+        }
+    ]
+}

@@ -99,12 +99,12 @@ variable "eks_instance_type" {
 /* EKS Auto Scaling Group Max Size */
 variable "eks_asg_max_size" {
     description     = "EKS Auto Scaling Group Max Size"
-    default         = 2
+    default         = 1
 }
 
 variable "asg_desired_capacity" {
     description     = "Desired Capacity"
-    default         = 2
+    default         = 1
 }
 
 /* Security Groups Names */

@@ -61,7 +61,7 @@ locals {
   cidr_c_public_subnets     = 64
 
   max_private_subnets       = 2
-  max_public_subnets        = 3
+  max_public_subnets        = 2
 }
 
 locals {
@@ -99,7 +99,12 @@ variable "eks_instance_type" {
 /* EKS Auto Scaling Group Max Size */
 variable "eks_asg_max_size" {
     description     = "EKS Auto Scaling Group Max Size"
-    default         = 3
+    default         = 2
+}
+
+variable "asg_desired_capacity" {
+    description     = "Desired Capacity"
+    default         = 2
 }
 
 /* Security Groups Names */

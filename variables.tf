@@ -2,17 +2,17 @@
 
 variable "project_owner" {
     description     = "Tag to identify the resource owner name"
-    default         = "William Munoz"
+    default         = "Manuela Carrasco"
 }
 
 variable "project_email" {
     description     = "Tag to identify the resource owner email"
-    default         = "william.munoz@endava.com"
+    default         = "manuela.carrasco@endava.com"
 } 
 
 variable "project_name" {
     description     = "Tag to identify the resource project name"
-    default         = "Kubernetes"
+    default         = "terraform-eks-01"
 }
 
 variable "is_project_terraformed" {
@@ -87,7 +87,7 @@ locals {
 /* EKS Wordpress Cluster */
 variable "eks_cluster_name" {
     description     = "EKS Cluster Name"
-    default         = "eks-wordpress"
+    default         = "terraform-eks-01"
 }
 
 /* EKS Wordpress Worker Nodes */

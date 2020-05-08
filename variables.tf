@@ -61,7 +61,7 @@ locals {
   cidr_c_public_subnets     = 64
 
   max_private_subnets       = 1
-  max_public_subnets        = 1
+  max_public_subnets        = 2
 }
 
 locals {

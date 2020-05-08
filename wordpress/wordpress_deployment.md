@@ -21,7 +21,7 @@
 - kubectl get svc -l app=wordpress --namespace=wp -o=jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
 - kubectl get deployments --namespace=wp
 
-### Delete Objects
+### Delete Wordpress Objects
 
 - kubectl delete deployment wordpress --namespace=wp
 - kubectl delete deployment wordpress-mysql --namespace=wp

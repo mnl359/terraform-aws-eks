@@ -42,7 +42,11 @@
                 "ec2:AssociateAddress",
                 "ec2:DescribeAddresses",
                 "ec2:ReleaseAddress",
-                "ec2:DisassociateAddress"
+                "ec2:DisassociateAddress",
+                "ec2:CreateVolume",
+                "ec2:DeleteVolume",
+                "ec2:AttachVolume",
+                "ec2:DetachVolume"
             ],
             "Resource": "*"
         },

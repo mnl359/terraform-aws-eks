@@ -62,5 +62,12 @@ Adjust default values on the following variables in variables.tf file.
 
 ## CircleCI Configuration
 
-The CircleCI configuration simple, just hook your GitHub account with CircleCI. Once you have your CircleCI linked with GitHub, setup the project  in the `Projects` section 
+The CircleCI configuration is simple, just hook your GitHub account with CircleCI. Once you have your CircleCI linked with GitHub, setup the project  in the `Add Projects` section. Then press the button `Set Up Project` in from of the repository, and press the `Add Config` button, this is just a starting point, it creates a new branch in your GitHub repository called `circleci-project-setup`. We don't need this branch, so you can delete it.
 
+This project comes with a CircleCI configuration file located in `.circleci/config.yml`, so the next time you make a commit in your master branch, CircleCI will build the Terraform according to the instructions in the `config.yml` file.
+
+Once the project is configured, go to `Project Settings`, `Environment Variables` and add the following variables:
+
+- AWS_ACCESS_KEY_ID
+- AWS_DEFAULT_REGION
+- AWS_SECRET_ACCESS_KEY

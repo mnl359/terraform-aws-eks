@@ -6,6 +6,7 @@
 
 - kubectl create -f gp2-storage-class.yaml
 - kubectl create namespace wp
+- kubectl create secret generic mysql-pass --from-literal=password=insert_your_password_here --namespace=wp
 - kubectl create secret generic mysql-pass --from-literal=password=$(aws secretsmanager get-random-password --password-length 20 --no-include-space | jq -r .RandomPassword) --namespace=wp
 
 ### Mysql Deployment

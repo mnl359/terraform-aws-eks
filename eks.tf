@@ -1,7 +1,7 @@
 module "eks-wordpress" {
     source              = "terraform-aws-modules/eks/aws"
     cluster_name        = var.eks_cluster_name
-    cluster_version     = "1.14"
+    cluster_version     = "1.15"
     subnets             = module.vpc.public_subnets
     vpc_id              = module.vpc.vpc_id
 

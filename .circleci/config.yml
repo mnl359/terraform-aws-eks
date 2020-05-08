@@ -1,0 +1,121 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.22
+
+terraform: &terraform
+  working_directory: ~/repo
+  docker:
+    - image: hashicorp/terraform:0.12.24
+  environment:
+    TF_IN_AUTOMATION: true
+    TF_VAR_AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    TF_VAR_AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+    TF_VAR_AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+
+ansible: &ansible
+  working_directory: ~/repo
+  docker:
+    - image: circleci/python:3.8.2
+
+jobs:
+  init:
+    <<: *terraform
+    steps:
+      - checkout
+      - run:
+          name: init
+          command: terraform init
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  plan:
+    <<: *terraform
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: plan
+          command: terraform plan
+      - store_artifacts:
+          path: ~/repo/tfplan
+          destination: tfplan
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  apply:
+    <<: *terraform
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: apply
+          command: terraform apply -auto-approve
+      - run:
+          name: show
+          command: terraform show -no-color > tfresult
+      - store_artifacts:
+          path: ~/repo/tfresult
+          destination: tfresult
+
+  wordpress_deployment:
+    <<: *ansible
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - add_ssh_keys:
+          fingerprints:
+            - "77:9b:3d:97:69:39:cc:11:0f:4a:e3:4d:3d:39:59:3b"
+      - aws-cli/setup:
+          profile-name: default
+      - run:
+          name: ansible deployment
+          command: |
+            pip install ansible
+            pip install boto
+            pip install simplejson
+            aws configure list
+            ansible-playbook -i ansible/ec2.py ansible/app.yml --user ec2-user -e wp_mysql_host=$(aws rds describe-db-instances --db-instance-identifier terraform-ansible-01 | python3 -c 'import sys, simplejson as json; print(json.load(sys.stdin)["DBInstances"][0]["Endpoint"]["Address"])')
+
+  destroy:
+    <<: *terraform
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: destroy app
+          command: terraform destroy -auto-approve
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - init
+      - plan:
+          requires:
+            - init
+      - apply:
+          requires:
+            - plan
+          filters:
+            branches:
+              only:
+                - master
+      - wordpress_deployment:
+          requires:
+            - apply
+          filters:
+            branches:
+              only:
+                - master
+          context:
+            aws
+      - destroy:
+          requires:
+            - plan
+          filters:
+            branches:
+              only:
+                - destroy

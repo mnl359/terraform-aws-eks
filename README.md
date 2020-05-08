@@ -62,7 +62,5 @@ Adjust default values on the following variables in variables.tf file.
 
 ## CircleCI Configuration
 
-I assume you have an AWS account and that you know the basis of AWS administration and configuration. 
-
-Coming soon... 
+The CircleCI configuration simple, just hook your GitHub account with CircleCI. Once you have your CircleCI linked with GitHub, setup the project  in the `Projects` section 
 

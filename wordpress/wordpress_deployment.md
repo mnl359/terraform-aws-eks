@@ -12,10 +12,15 @@
 
 - kubectl create -f mysql-deployment.yaml --namespace=wp
 - kubectl get pods --namespace=wp
+
+### Wordpress Deployment
+
 - kubectl create -f wordpress-deployment.yaml --namespace=wp
+- kubectl get pods --namespace=wp
 
 ### Validate Services
 
+- kubectl get storageclass
 - kubectl get all --namespace=wp
 - kubectl get pods --namespace=wp
 - kubectl get svc --namespace=wp
@@ -23,6 +28,18 @@
 - kubectl get deployments --namespace=wp
 - kubectl get pvc --namespace=wp
 - kubectl get secrets --namespace=wp
+
+### How to connect to MySQL pod 
+
+- kubectl get pods --namespace=wp
+- kubectl get secret mysql-pass --namespace=wp -o yaml
+- kubectl get secrets/mysql-pass --namespace=wp --template={{.data.password}} | base64 -D
+- kubectl exec -it change_pod_name --namespace=wp -- /bin/bash
+
+### How to connect to Wordpress pods
+
+- kubectl get pods --namespace=wp
+- kubectl exec -it change_pod_name --namespace=wp -- /bin/bash
 
 ### Delete Wordpress Objects
 
@@ -34,3 +51,4 @@
 - kubectl delete pvc wp-pv-claim --namespace=wp
 - kubectl delete secrets mysql-pass --namespace=wp
 - kubectl delete namespace wp
+- kubectl delete storageclass standard

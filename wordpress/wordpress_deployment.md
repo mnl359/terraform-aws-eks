@@ -11,6 +11,7 @@
 ### Mysql Deployment
 
 - kubectl create -f mysql-deployment.yaml --namespace=wp
+- kubectl get pods --namespace=wp
 - kubectl create -f wordpress-deployment.yaml --namespace=wp
 
 ### Validate Services
@@ -20,6 +21,7 @@
 - kubectl get svc --namespace=wp
 - kubectl get svc -l app=wordpress --namespace=wp -o=jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
 - kubectl get deployments --namespace=wp
+- kubectl get pvc --namespace=wp
 
 ### Delete Wordpress Objects
 
@@ -27,4 +29,6 @@
 - kubectl delete deployment wordpress-mysql --namespace=wp
 - kubectl delete service wordpress --namespace=wp
 - kubectl delete service wordpress-mysql --namespace=wp
+- kubectl delete pvc mysql-pv-claim --namespace=wp
+- kubectl delete pvc wp-pv-claim --namespace=wp
 - kubectl delete namespace wp
